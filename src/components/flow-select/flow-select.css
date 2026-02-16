@@ -1,0 +1,69 @@
+.flowSelect {
+	display: flex;
+	flex-direction: column;
+	--flowSelectScale: 1;
+	--flowSelectWidthBase: 360px;
+	--flowSelectWidth: calc(var(--flowSelectWidthBase) * var(--flowSelectScale));
+	gap: calc(12px * var(--flowSelectScale));
+	width: min(var(--flowSelectWidth), 100%);
+}
+
+.flowSelect__option {
+	appearance: none;
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	background: rgba(15, 23, 42, 0.04);
+	border-radius: 999px;
+	padding: calc(14px * var(--flowSelectScale)) calc(18px * var(--flowSelectScale));
+	display: flex;
+	align-items: center;
+	gap: calc(14px * var(--flowSelectScale));
+	cursor: pointer;
+	text-align: left;
+	transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.flowSelect__option:hover {
+	background: rgba(15, 23, 42, 0.06);
+}
+
+.flowSelect__option:focus-visible {
+	outline: 3px solid rgba(59, 130, 246, 0.35);
+	outline-offset: 2px;
+}
+
+.flowSelect__option.isSelected {
+	background: rgba(59, 130, 246, 0.85);
+	border-color: rgba(59, 130, 246, 0.9);
+}
+
+.flowSelect__option[disabled] {
+	opacity: 0.55;
+	cursor: not-allowed;
+}
+
+.flowSelect__dot {
+	width: calc(18px * var(--flowSelectScale));
+	height: calc(18px * var(--flowSelectScale));
+	border-radius: 999px;
+	border: 2px solid rgba(148, 163, 184, 0.8);
+	background: transparent;
+	flex: none;
+}
+
+.flowSelect__dot.isSelected {
+	border-color: rgba(255, 255, 255, 0.95);
+	background: rgba(255, 255, 255, 0.95);
+}
+
+.flowSelect__label {
+	font-size: calc(18px * var(--flowSelectScale));
+	font-weight: 700;
+	color: rgba(15, 23, 42, 0.86);
+}
+
+.flowSelect__option.isSelected .flowSelect__label {
+	color: #ffffff;
+}
+

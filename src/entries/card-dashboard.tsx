@@ -1,0 +1,67 @@
+import { useEffect, useState } from 'react';
+import type { CreditCard } from '../lib/types';
+import { useOpenAiGlobal } from '../lib/hooks';
+import CreditCardComp from '../components/credit-card/credit-card';
+
+export default function CardDashboard() {
+  const [cards, setCards] = useState<CreditCard[]>([]);
+  const toolOutput = useOpenAiGlobal('toolOutput');
+
+  useEffect(() => {
+    const list = toolOutput?.cardList || [];
+    setCards(list);
+  }, [toolOutput]);
+
+
+
+  return (
+    <div className="w-full bg-transparent">
+      <div className="mx-auto max-w-[1200px]">
+
+        {/* MOBILE SLIDER */}
+        <div
+          className="
+          flex gap-6
+          overflow-x-auto overflow-y-hidden
+          px-6 pb-8
+          snap-x snap-mandatory
+          scroll-smooth
+          lg:hidden
+        "
+        >
+          {cards.map(card => (
+            <div
+              key={card.id}
+              className="
+              snap-center shrink-0
+              w-full max-w-[350px]
+            "
+            >
+              <CreditCardComp card={card} />
+            </div>
+          ))}
+        </div>
+
+        {/* DESKTOP GRID */}
+        <section
+          className="
+          hidden lg:grid
+          grid-cols-3
+          justify-items-center
+          gap-10
+          px-6
+        "
+        >
+          {cards.map(card => (
+            <div key={card.id} className="w-[320px]">
+              <CreditCardComp card={card} />
+            </div>
+          ))}
+        </section>
+
+      </div>
+    </div>
+  );
+}
+
+

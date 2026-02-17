@@ -83,7 +83,7 @@
 	box-sizing: border-box;
 	border: none;
 	border-radius: 999px;
-	background: rgba(14, 165, 233, 0.95);
+	background: #0072bc;
 	color: #fff;
 	padding: calc(18px * var(--identificationFlowScale)) calc(26px * var(--identificationFlowScale));
 	display: flex;

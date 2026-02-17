@@ -46,7 +46,7 @@
   font-size: calc(20px * var(--creditCardScale));
   font-weight: 700;
   margin: 0;
-  color: #0f172a;
+  color: #001955;
 }
 
 .card-promo {
@@ -78,7 +78,7 @@
   flex-shrink: 0;
   width: calc(18px * var(--creditCardScale));
   height: calc(18px * var(--creditCardScale));
-  color: #2563eb;
+  color: #0072bc;
   margin-top: calc(2px * var(--creditCardScale));
 }
 
@@ -93,7 +93,7 @@
   padding: calc(12px * var(--creditCardScale)) calc(14px * var(--creditCardScale));
   border: none;
   border-radius: 999px;
-  background: #ff7a00;
+  background: #0072bc;
   color: white;
   font-weight: 600;
   font-size: calc(14px * var(--creditCardScale));
@@ -102,5 +102,5 @@
 }
 
 .card-button:hover {
-  background: #e56f00;
+  background: #2b67ff;
 }

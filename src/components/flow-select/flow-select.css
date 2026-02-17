@@ -34,8 +34,8 @@
 }
 
 .flowSelect__option.isSelected {
-	background: rgba(59, 130, 246, 0.85);
-	border-color: rgba(59, 130, 246, 0.9);
+	background: #0072bc;
+	border-color: #0072bc;
 }
 
 .flowSelect__option[disabled] {

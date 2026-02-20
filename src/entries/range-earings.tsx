@@ -4,7 +4,6 @@ import { RANGE_EARINGS_OPTIONS, type RangeEaringsOptionValue } from '../mock/ran
 
 export default function RangeEarings() {
     const [value, setValue] = useState<RangeEaringsOptionValue>(RANGE_EARINGS_OPTIONS[0]?.value ?? 'lt_1200');
-
     return (
         <div className="w-full max-w-md mx-auto p-6">
             <FlowSelect
@@ -12,7 +11,15 @@ export default function RangeEarings() {
                 options={[...RANGE_EARINGS_OPTIONS]}
                 value={value}
                 onChange={(next) => {
-                    setValue(next as RangeEaringsOptionValue);
+                    const v = next as RangeEaringsOptionValue;
+                    setValue(v);
+
+                    window.parent?.postMessage(
+                      { type: "range_earnings_selected", value: v },
+                      "*"
+                    );
+
+                    console.log("value sent");
                 }}
             />
         </div>

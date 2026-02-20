@@ -1,8 +1,5 @@
 import { useMemo, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import CREDIT_CARDS from '../mock/credit-cards.js';
-import type { CreditCard } from '../../../../poc-apps-openai/web/src/lib/types.js';
-import CreditCardComp from '../components/credit-card/credit-card.js';
+import CREDIT_CARDS, { type FlowCreditCard } from '../mock/credit-cards';
 
 const INCOME_OPTIONS = [
   { id: 'inc1', label: 'Menos de 500€', value: 0 },
@@ -26,7 +23,7 @@ export default function CreditCardFlow() {
   const [photo, setPhoto] = useState<File | null>(null);
 
   const matched = useMemo(() => {
-    if (income == null || preference == null) return [] as CreditCard[];
+    if (income == null || preference == null) return [] as FlowCreditCard[];
     return CREDIT_CARDS.filter((c) => c.minIncome <= income && c.features.includes(preference));
   }, [income, preference]);
 
@@ -72,6 +69,9 @@ export default function CreditCardFlow() {
               <label className="flex flex-col">
                 <span className="text-sm font-medium">2. Tomar foto:</span>
                 <input type="file" accept="image/*" onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} className="mt-1" />
+                {photo ? (
+                  <span className="mt-1 text-xs font-medium text-slate-500">Archivo: {photo.name}</span>
+                ) : null}
               </label>
 
               <div className="flex gap-2 mt-3">
@@ -101,10 +101,4 @@ export default function CreditCardFlow() {
       </div>
     </div>
   );
-}
-
-// Solo renderizar si no estamos en Ladle/Storybook
-if (typeof window !== 'undefined' && document.getElementById('root')) {
-  const root = createRoot(document.getElementById('root')!);
-  root.render(<CreditCardFlow />);
 }

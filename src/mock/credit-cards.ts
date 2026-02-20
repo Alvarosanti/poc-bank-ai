@@ -1,6 +1,13 @@
-import type { CreditCard } from '../../../../poc-apps-openai/web/src/lib/types.js';
+export type FlowCreditCard = {
+  id: string;
+  name: string;
+  minIncome: number;
+  features: string[];
+  description: string;
+  deeplink: string;
+};
 
-export const CREDIT_CARDS: CreditCard[] = [
+export const CREDIT_CARDS: FlowCreditCard[] = [
   {
     id: 'cc-basic-1',
     name: 'Tarjeta Básica Cashback',

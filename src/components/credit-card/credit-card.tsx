@@ -8,7 +8,7 @@ type Props = {
     scale?: number;
 };
 
-export default function CreditCard({ card, scale = 1 }: Props) {
+export default function CreditCard({ card, scale = 0.8 }: Props) {
     const highlights = (card.highlights ?? []).slice(0, 4);
 
     const normalizedScale = Number.isFinite(scale) && scale > 0 ? scale : 1;

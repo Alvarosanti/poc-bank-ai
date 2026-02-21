@@ -1,16 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { CreditCard } from '../lib/types';
 import { useOpenAiGlobal } from '../lib/hooks';
 import CreditCardComp from '../components/credit-card/credit-card';
 
 export default function CardDashboard() {
   const [cards, setCards] = useState<CreditCard[]>([]);
+  const [searchParams] = useSearchParams();
   const toolOutput = useOpenAiGlobal('toolOutput');
 
   useEffect(() => {
     const list = toolOutput?.cardList || [];
     setCards(list);
   }, [toolOutput]);
+
+  const visibleCards = useMemo(() => {
+    const rawCount = searchParams.get('count');
+    if (rawCount === null) return cards;
+
+    const parsedCount = Number.parseInt(rawCount, 10);
+    if (Number.isNaN(parsedCount) || parsedCount < 0) return cards;
+
+    return cards.slice(0, parsedCount);
+  }, [cards, searchParams]);
 
 
 
@@ -23,13 +35,13 @@ export default function CardDashboard() {
           className="
           flex gap-6
           overflow-x-auto overflow-y-hidden
-          px-6 pb-8
+          px-6
           snap-x snap-mandatory
           scroll-smooth
           lg:hidden
         "
         >
-          {cards.map(card => (
+          {visibleCards.map(card => (
             <div
               key={card.id}
               className="
@@ -52,7 +64,7 @@ export default function CardDashboard() {
           px-6
         "
         >
-          {cards.map(card => (
+          {visibleCards.map(card => (
             <div key={card.id} className="w-[320px]">
               <CreditCardComp card={card} />
             </div>
@@ -63,5 +75,3 @@ export default function CardDashboard() {
     </div>
   );
 }
-
-

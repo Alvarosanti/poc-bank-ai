@@ -12,7 +12,15 @@ export default function BenefitOptions() {
                 options={[...BENEFITS_OPTIONS]}
                 value={value}
                 onChange={(next) => {
-                    setValue(next as BenefitsOption);
+                    const v = next as BenefitsOption;
+                    setValue(v);
+
+                    window.parent?.postMessage(
+                      { type: "benefits_selected", value: v },
+                      "*"
+                    );
+
+                    console.log("value sent");
                 }}
             />
         </div>

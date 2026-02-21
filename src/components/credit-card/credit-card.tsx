@@ -17,9 +17,11 @@ export default function CreditCard({ card, scale = 0.8 }: Props) {
     };
 
     const handleApplyClick = () => {
-        if (typeof window !== 'undefined') {
-            window.open(card.deeplink, '_blank', 'noopener,noreferrer');
-        }
+        
+        window.parent?.postMessage({ type: "open_link", url: card.deeplink }, "*");
+
+        // fallback cuando corres standalone en navegador normal
+        window.open(card.deeplink, "_blank", "noopener,noreferrer");
     };
 
     return (
